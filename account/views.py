@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.views import View
 
@@ -22,7 +22,10 @@ def reg(request):
 #         passwd = request.POST.get('psw')
 #         return HttpResponse(f'username :{username} \n password:{passwd}')
     
-
+user = {
+    'username':'abh',
+    'password':'123'
+}
 #class views
 class SignIn(View):
     def get(self,request,*args,**kwargs):
@@ -30,5 +33,9 @@ class SignIn(View):
     def post(self,request):
         username = request.POST.get('uname')
         passwd = request.POST.get('psw')  
-        return HttpResponse(f'username:{username} \n password:{passwd}') 
+        if user['username'] == username and user['password'] == passwd:
+            return redirect('dash') 
+        else:
+            return redirect('login')
+
 
