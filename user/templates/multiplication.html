@@ -1,0 +1,13 @@
+{% extends "navbar.html" %}
+{% block  dash %}
+<h1>Multiplication</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container w-50 d-flex flex-column justify-content-center shadow">
+        <input type="number" name="num1" class="form-control my-4" placeholder="number1">
+        <input type="number" name="num2" class="form-control my-4" placeholder="number2">
+        <h1>{{data}}</h1>
+        <button type="submit" class="btn btn-success my-4">Add</button>
+    </div>
+</form>
+{% endblock dash %}

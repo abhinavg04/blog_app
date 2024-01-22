@@ -1,0 +1,14 @@
+{% extends "navbar.html" %}
+{% block  dash %}
+<h1>word Count</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container w-50 d-flex flex-column justify-content-center shadow">
+        <input type="text" name="text" class="form-control my-4" placeholder="Enter a sentence">
+        {% for key,value in  data.items %}
+        <h1>{{key}}:{{value}}</h1>
+        {% endfor %}
+        <button type="submit" class="btn btn-success my-4">Find word count</button>
+    </div>
+</form>
+{% endblock dash %}
