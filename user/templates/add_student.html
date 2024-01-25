@@ -1,0 +1,13 @@
+{% extends "navbar.html" %}
+{% block dash %}
+<h1> add Student</h1>
+<div class="text-center container w-75">
+    <form action="" method="post" enctype="">
+        {% csrf_token %}
+        <table class="table table-light p-5">
+            {{form.as_table}}
+        </table>
+        <button type="submit" class="btn btn-primary">Click</button>
+    </form>
+</div>
+{% endblock dash %}

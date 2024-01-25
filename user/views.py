@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from django.http import HttpResponse
+from .form import BlogForm,StudentDetails
 # Create your views here.
 
 class DashBoardView(View):
@@ -24,7 +25,7 @@ class AdditionView(View):
         return render(request,'addition.html',context)
 class MulView(View):
     def get(self,request):
-        return render(request,"addition.html")
+        return render(request,"multiplication.html")
     def post(self,request):
         num1 = request.POST.get('num1')
         num2 = request.POST.get('num2')
@@ -50,3 +51,47 @@ class WordCount(View):
         context={}
         context["data"] = d
         return render(request,'word_count.html',context)
+    
+class AddBlog(View):
+    def get(self,request):
+        form = BlogForm()
+        return render(request,"add_blog.html",{"form":form})
+    def post(self,request):
+        # title = request.POST.get('title')
+        # body = request.POST.get('body')
+        # auth = request.POST.get('author')
+        # img  = request.POST.get('image')
+        # print(title,body,auth,img)
+        form_data = BlogForm(data=request.POST,files=request.FILES)
+        print(form_data.is_valid())
+        if form_data.is_valid():
+            title = form_data.cleaned_data.get('title')
+            body = form_data.cleaned_data.get('body')
+            auth = form_data.cleaned_data.get('author')
+            print(title,body,auth)
+            return HttpResponse("SuccessFull")
+        else:
+            print(form_data.errors)
+            return HttpResponse("Submission Failed")
+        
+class AddStud(View):
+    def get(self,request):
+        stud_form = StudentDetails()
+        return render(request,"add_student.html",{"form":stud_form})
+    def post(self,request):
+        form_data = StudentDetails(data=request.POST)
+        print(form_data.is_valid())
+        if form_data.is_valid():
+            firstname = form_data.cleaned_data.get('firstname')
+            lastname = form_data.cleaned_data.get('lastname')
+            dob = form_data.cleaned_data.get('dob')
+            email = form_data.cleaned_data.get('email')
+            phone = form_data.cleaned_data.get('phone')
+            address = form_data.cleaned_data.get('address')
+            department = form_data.cleaned_data.get('department')
+            print(firstname,lastname,dob,email,phone,address,department)
+            return HttpResponse("SuccessFully Submitted")
+        else:
+            print(form_data.errors)
+            return HttpResponse("Submission Failed")
+    
