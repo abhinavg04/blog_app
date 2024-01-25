@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from django.http import HttpResponse
-from .form import BlogForm,StudentDetails
+from .form import BlogForm,StudentDetails,ProductForm,SubForm
 # Create your views here.
 
 class DashBoardView(View):
@@ -94,4 +94,36 @@ class AddStud(View):
         else:
             print(form_data.errors)
             return HttpResponse("Submission Failed")
+
+
+class ProductView(View):
+    def get(self,request):
+        pr_form = ProductForm()
+        return render(request,"product.html",{"form":pr_form})
+    def post(self,request):
+        form_data = ProductForm(data=request.POST)
+        if form_data.is_valid():
+            print(form_data.cleaned_data)
+            return HttpResponse("post hit")
+        else:
+            print(form_data.errors)
+            return render(request,"product.html",{"form":form_data})
+    
+
+class SubView(View):
+    def get(self,request):
+        sub_form = SubForm()
+        return render(request,"subtraction.html",{"form":sub_form})
+    def post(self,request):
+        form_data = SubForm(data=request.POST)
+        if form_data.is_valid():
+            num1 = form_data.cleaned_data.get('num1')
+            num2 = form_data.cleaned_data.get('num2')
+            diff = int(num1)-int(num2)
+            context={}
+            context["data"] = diff
+            return render(request,'subtraction.html',context)
+        else:
+            print(form_data.errors)
+            return render(request,"subtraction.html",{"form":form_data})    
     

@@ -7,4 +7,6 @@ urlpatterns = [
     path('word',WordCount.as_view(),name="word"),
     path('blog',AddBlog.as_view(),name="blog"),
     path('addstud',AddStud.as_view(),name="add_stud"),
+    path('product',ProductView.as_view(),name="prod"),
+    path('sub',SubView.as_view(),name="sub"),
 ]
