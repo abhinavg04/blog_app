@@ -1,4 +1,3 @@
-from typing import Any
 from django import forms
 
 class BlogForm(forms.Form):
@@ -23,7 +22,7 @@ class ProductForm(forms.Form):
     price = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control"}))
 
 
-    def clean(self) -> dict[str, Any]:
+    def clean(self):
         cleaned_data = super().clean()
         title = cleaned_data.get("title")
         price = cleaned_data.get("price")
@@ -38,7 +37,7 @@ class SubForm(forms.Form):
     num1 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control m-2"}))
     num2 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control m-2 "}))
 
-    def clean(self) -> dict[str, Any]:
+    def clean(self):
         cleaned_data = super().clean()
         num1 = cleaned_data.get("num1")
         num2 = cleaned_data.get("num2")
