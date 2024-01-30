@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.views import View
 from django.http import HttpResponse
 from .form import BlogForm,StudentDetails,ProductForm,SubForm
+from .models import StudentModel
 # Create your views here.
 
 class DashBoardView(View):
@@ -89,7 +90,9 @@ class AddStud(View):
             phone = form_data.cleaned_data.get('phone')
             address = form_data.cleaned_data.get('address')
             department = form_data.cleaned_data.get('department')
-            print(firstname,lastname,dob,email,phone,address,department)
+            st = StudentModel(firstname=firstname,lastname=lastname,dob=dob,
+                              email=email,phone=phone,address=address,department=department)
+            st.save()
             return HttpResponse("SuccessFully Submitted")
         else:
             print(form_data.errors)
