@@ -1,4 +1,5 @@
 from django import forms
+from .models import TeacherModel
 
 class BlogForm(forms.Form):
     title = forms.CharField(max_length=100)
@@ -6,7 +7,7 @@ class BlogForm(forms.Form):
     author = forms.CharField(max_length=100)
     image = forms.FileField()
 
-class StudentDetails(forms.Form):
+class StudentForm(forms.Form):
     firstname = forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter your First name"}))
     lastname = forms.CharField(max_length=100,widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Enter your last name"}))
     dob = forms.DateField(widget=forms.DateInput(attrs={"class":"form-control","placeholder":"Enter your date of birth"}))
@@ -34,8 +35,8 @@ class ProductForm(forms.Form):
         return cleaned_data
     
 class SubForm(forms.Form):
-    num1 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control m-2"}))
-    num2 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control m-2 "}))
+    num1 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-control"}))
+    num2 = forms.IntegerField(widget=forms.NumberInput(attrs={"class":"form-contro"}))
 
     def clean(self):
         cleaned_data = super().clean()
@@ -44,3 +45,8 @@ class SubForm(forms.Form):
         if num1 < num2:
             self.add_error("num1","number 1 should be greater than number 2")
         return cleaned_data
+
+class TeacherModelForm(forms.ModelForm):
+    class Meta:
+        model = TeacherModel
+        fields = "__all__"

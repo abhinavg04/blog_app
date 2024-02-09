@@ -1,0 +1,12 @@
+{% extends "navbar.html" %}
+{% block dash %}
+<h1>Add Teacher</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <table class="table table-success">
+        {{form.as_table}}
+    </table>
+    <button class='btn btn-info' type="submit">Add</button>
+</form>
+{% endblock dash %}
+

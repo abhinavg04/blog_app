@@ -1,0 +1,43 @@
+{% extends "navbar.html" %}
+{% block dash %}
+    <h1 class="text-center fw-bold text-info">Students</h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Dob</th>
+            <th scope="col">email</th>
+            <th scope="col">Subject</th>
+            {% comment %} <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Department</th> {% endcomment %}
+          </tr>
+        </thead>
+        <tbody>
+            {% for teach in data %}
+          <tr>
+            <td>{{teach.name}}</td>
+            <td>{{teach.dob}}</td>
+            {% comment %} <td>{{stud.dob}}</td>
+            <td>{{stud.email}}</td> {% endcomment %}
+            {% comment %} <td>{{stud.phone}}</td> {% endcomment %}
+            {% comment %} <td>{{stud.address}}</td> {% endcomment %}
+            <td>{{teach.email}}</td>
+            <td>{{teach.subject}}</td>
+             <td>
+                <a href="{% url 't_delete' teach.id %}" class="btn btn-danger" onclick="return confirm('Are you sure');">Delete</a>
+              </td>
+              <td>
+                <a href="{% url 't_edit' teach.id %}" class="btn btn-warning">Edit</a>
+              </td>
+            {% comment %}
+            <td>
+              <a href="{% url 'studEdit' stud.id %}" class="btn btn-warning">Edit</a>
+            </td> {% endcomment %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+{% endblock dash %}
+
